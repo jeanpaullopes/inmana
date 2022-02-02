@@ -17,4 +17,5 @@ defmodule Inmana.Restaurant do
     |> cast(attrs, [:name, :email])
     |> validate_required([:name, :email])
   end
+  
 end

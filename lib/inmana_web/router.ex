@@ -23,6 +23,7 @@ defmodule InmanaWeb.Router do
 
   scope "/api", InmanaWeb do
     pipe_through :api
+    
     resources "/restaurants", RestaurantController
   end
 
