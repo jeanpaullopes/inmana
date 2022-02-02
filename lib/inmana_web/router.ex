@@ -23,8 +23,9 @@ defmodule InmanaWeb.Router do
 
   scope "/api", InmanaWeb do
     pipe_through :api
-    
+
     resources "/restaurants", RestaurantController
+    resources "/supriments", SuprimentController
   end
 
   # Other scopes may use custom stacks.
