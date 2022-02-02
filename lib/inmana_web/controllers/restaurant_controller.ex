@@ -6,16 +6,21 @@ defmodule InmanaWeb.RestaurantController do
     all = Inmana.Restaurant |> Inmana.Repo.all()
     json(conn,all)
   end
-  def show(conn, _params) do
+  def show(conn, params) do
     render(conn, "index.html")
   end
-  def create(conn, _params) do
+  def create(conn, params) do
 
-    restaurant = %Inmana.Restaurant{}
-    changeset = Inmana.Restaurant.changeset(restaurant, _params)
+    #changed Restaurant.changeset
+    #ret = %Inmana.Restaurant{} |> Inmana.Restaurant.changeset(params) |> Inmana.Repo.insert()
+    ret = Inmana.Restaurant.changeset(params) |> Inmana.Repo.insert()
 
-    case Inmana.Repo.insert(changeset) do
-      {:ok, rest} -> render(conn, rest)
+    case ret do
+
+      {:ok, rest} ->
+        #a = %{"id" => rest.id, "name" => rest.name, "email" => rest.email}
+        #json(conn, rest)
+        render(conn, "create.json", restaurant: rest)
 
       {:error, rest} ->
         # do something with changeset
