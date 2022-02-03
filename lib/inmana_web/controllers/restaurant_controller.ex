@@ -22,22 +22,12 @@ defmodule InmanaWeb.RestaurantController do
   end
 
   def update(conn, params) do
-    ret =
+    {:ok, rest} =
       Inmana.Restaurant
       |> Inmana.Repo.get(params["id"])
       |> Inmana.Restaurant.changeset(params)
       |> Inmana.Repo.update()
 
-    case ret do
-      {:ok, rest} ->
-        {
-          # a = %{"id" => rest.id, "name" => rest.name, "email" => rest.email}
-          # json(conn, rest)
-          render(conn, "create.json", restaurant: rest)
-        }
-
-        #  {:error, rest} ->{ rest}
-        #    # do something with changeset
-    end
+    render(conn, "create.json", restaurant: rest)
   end
 end
