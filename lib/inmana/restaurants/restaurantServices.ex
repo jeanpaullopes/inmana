@@ -1,4 +1,4 @@
-defmodule Inmana.Restaurant.RestaurantServices do
+defmodule Inmana.Supriment.RestaurantServices do
   alias Inmana.Restaurant
   alias Inmana.Restaurant.DAO
 
@@ -19,6 +19,4 @@ defmodule Inmana.Restaurant.RestaurantServices do
     {:ok, restaurant} = DAO.update_restaurant(id, params)
     restaurant
   end
-
-
 end
