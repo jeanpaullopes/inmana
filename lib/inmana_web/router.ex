@@ -26,6 +26,7 @@ defmodule InmanaWeb.Router do
 
     resources "/restaurants", RestaurantController
     resources "/supriments", SuprimentController
+    get "/supriments/restaurant/:id", SuprimentController, :showSuprimentsRestaurant
   end
 
   # Other scopes may use custom stacks.

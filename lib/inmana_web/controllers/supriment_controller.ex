@@ -1,6 +1,7 @@
 defmodule InmanaWeb.SuprimentController do
   use InmanaWeb, :controller
   alias Inmana.Supriment
+  import Ecto.Query, only: [from: 2]
 
   def index(conn, _params) do
     all = Inmana.Supriment  |> Inmana.Repo.all() |> Inmana.Repo.preload(:restaurant)
@@ -13,7 +14,7 @@ defmodule InmanaWeb.SuprimentController do
     supriment = Inmana.Supriment |> Inmana.Repo.get!(params["id"]) |> Inmana.Repo.preload(:restaurant)
     render(conn, "create.json", supriment: supriment)
   end
-  
+
   def create(conn, params) do
 
     restaurant = Inmana.Repo.get!(Inmana.Restaurant, params["restaurant"]["id"])
@@ -46,5 +47,12 @@ defmodule InmanaWeb.SuprimentController do
     #  {:error, rest} ->{ rest}
     #    # do something with changeset
     end
+  end
+
+  def showSuprimentsRestaurant(conn, params) do
+    query = from s in Supriment, where: s.restaurant_id == ^params["id"], select: s
+
+    all = Inmana.Repo.all(query) |> Inmana.Repo.preload(:restaurant)
+    json(conn,all)
   end
 end
